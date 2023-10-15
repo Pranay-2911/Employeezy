@@ -75,6 +75,11 @@ from flask import send_file
 @app.route('/download_csv')
 def download_csv():
     # Generate the CSV content
+    results = request.args.get('results')
+    if results:
+        results = eval(results)  # Convert the results back to a list
+
+
     csv_content = "Rank,Name,Email,Similarity\n"
     for rank, (names, emails, similarity) in enumerate(results, start=1):
         name = names[0] if names else "N/A"
