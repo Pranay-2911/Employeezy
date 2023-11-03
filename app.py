@@ -96,26 +96,5 @@ def download_csv():
     csv_full_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), csv_filename)
     return send_file(csv_full_path, as_attachment=True, download_name="ranked_resumes.csv")
 
-
-@app.route('/analyze_resume', methods=['POST'])
-def analyze_resume():
-    results = []
-
-    if 'resume_files' in request.files:
-        uploaded_resume = request.files['resume_files']
-
-        # Check if a file is selected
-        if uploaded_resume.filename != '':
-            # Save the uploaded file
-            resume_path = os.path.join("uploads", uploaded_resume.filename)
-            uploaded_resume.save(resume_path)
-
-            # Process the saved file
-            resume_text = extract_text_from_pdf(resume_path)
-            emails, names = extract_entities(resume_text)
-            results = [(names, emails, resume_text)]
-
-    return render_template('index.html', results=results)
-
 if __name__ == '__main__':
     app.run(debug=True)
