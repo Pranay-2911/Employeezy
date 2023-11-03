@@ -34,9 +34,10 @@
       </a>
     </div>
     <div class="btn">
-      <form action="/index" method="POST" enctype="multipart/form-data">
-        <img src="Resume.jpg" height="75" alt="Resume Image">
-        <span>TEAM RECOMMENDER</span>
+      <form action="/analyze_resume" method="POST" enctype="multipart/form-data">
+        <label for="resume_files">Upload Resume:</label>
+        <input type="file" name="resume_files" id="resume_files">
+        <input type="submit" value="Resume Analyzer">
       </form>
     </div>
   </div>		
