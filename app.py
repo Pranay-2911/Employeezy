@@ -85,7 +85,8 @@ def download_csv():
     ##results = request.args.get('results')
     results = session.get('results')
     if results:
-        results = eval(results)  # Convert the results back to a list
+        #results = eval(results)  # Convert the results back to a list
+        csv_filename = "ranked_resumes.csv"
 
 
     csv_content = "Rank,Name,Email,Similarity\n"
@@ -95,7 +96,7 @@ def download_csv():
         csv_content += f"{rank},{name},{email},{similarity}\n"
 
     # Create a temporary file to store the CSV content
-    csv_filename = "ranked_resumes.csv"
+    
     with open(csv_filename, "w") as csv_file:
         csv_file.write(csv_content)
 
