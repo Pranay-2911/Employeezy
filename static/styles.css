@@ -2,14 +2,13 @@
 body, h1, h2, p, table, th, td {
     margin: 0;
     padding: 0;
-    
 }
 
 
 /* Basic styling */
 body {
-    font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
     color: #333;
     padding: 20px;
 }
@@ -20,7 +19,7 @@ h1 {
 
 /* Form styling */
 form {
-    background: linear-gradient(#141e30, #243b55);
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
