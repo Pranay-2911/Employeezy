@@ -81,29 +81,28 @@ from flask import send_file
 
 @app.route('/download_csv')
 def download_csv():
-    # Generate the CSV content
-    ##results = request.args.get('results')
+    # Retrieve the results from the session
     results = session.get('results')
-    if results:
-        #results = eval(results)  # Convert the results back to a list
-        csv_filename = "ranked_resumes.csv"
 
+    if not results:
+        return "No results to download"
 
+    csv_filename = "ranked_resumes.csv"
     csv_content = "Rank,Name,Email,Similarity\n"
+
     for rank, (names, emails, similarity) in enumerate(results, start=1):
         name = names[0] if names else "N/A"
         email = emails[0] if emails else "N/A"
         csv_content += f"{rank},{name},{email},{similarity}\n"
 
     # Create a temporary file to store the CSV content
-    
     with open(csv_filename, "w") as csv_file:
         csv_file.write(csv_content)
 
     # Send the file for download
-    
     csv_full_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), csv_filename)
     return send_file(csv_full_path, as_attachment=True, download_name="ranked_resumes.csv")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
