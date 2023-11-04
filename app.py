@@ -68,7 +68,7 @@ def index():
 
         results = ranked_resumes
 
-    return render_template('Login.html', results=results)
+    return render_template('index.html', results=results)
 
 from flask import send_file
 
