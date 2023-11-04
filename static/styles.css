@@ -8,7 +8,7 @@ body, h1, h2, p, table, th, td {
 /* Basic styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background: linear-gradient(#141e30, #243b55);
     color: #333;
     padding: 20px;
 }
@@ -19,10 +19,10 @@ h1 {
 
 /* Form styling */
 form {
-    background-color: #fff;
+    background: rgba(0,0,0,.5);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 
 label, input[type="file"], textarea, input[type="submit"] {
