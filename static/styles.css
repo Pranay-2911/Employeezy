@@ -32,7 +32,7 @@ form {
 
 label, input[type="file"], textarea, input[type="submit"] {
     display: block;
-    color: #0c0c0c;
+    color: #362f3a;
     margin-bottom: 10px;
 }
 
@@ -73,6 +73,7 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+    color: #0e0d0d;
 }
 
 /* Responsive layout */
