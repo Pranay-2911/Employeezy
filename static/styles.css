@@ -1,48 +1,41 @@
 /* Reset some default styles */
-body, h2, table, th, td {
+body, h1, h2, p, table, th, td {
     margin: 0;
     padding: 0;
+    
 }
+
 
 /* Basic styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 20px;
 }
 
-.login-box {
-    width: 400px;
-    background-color: #fff;
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+form {
+    background: linear-gradient(#141e30, #243b55);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Form styling */
-.user-box {
-    position: relative;
-}
-
-user-box input[type="file"], textarea, user-box a {
+label, input[type="file"], textarea, input[type="submit"] {
     display: block;
     margin-bottom: 10px;
 }
 
-user-box input[type="file"] {
+input[type="file"] {
     margin-top: 5px;
 }
 
-user-box textarea {
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -50,15 +43,13 @@ user-box textarea {
     resize: vertical;
 }
 
-user-box a {
+input[type="submit"] {
     background-color: #007bff;
     color: #fff;
-    text-align: center;
-    padding: 10px;
+    border: none;
+    padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
-    display: block;
 }
 
 /* Table styling */
@@ -80,7 +71,7 @@ th {
 
 /* Responsive layout */
 @media (max-width: 768px) {
-    .login-box {
+    form {
         width: 100%;
         padding: 15px;
     }
