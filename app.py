@@ -3,11 +3,16 @@ import spacy
 import PyPDF2
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from flask import Flask, session
+from flask_session import Session
 import re
 import csv
 import os
 
 app = Flask(__name__)
+
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 # Load spaCy NER model
 nlp = spacy.load("en_core_web_sm")
@@ -29,10 +34,12 @@ def extract_entities(text):
         names = [" ".join(names[0])]
     return emails, names
 
+from flask import session
 @app.route('/', methods=['GET', 'POST'])
 def index():
     results = []
     if request.method == 'POST':
+        session['results'] = results
         job_description = request.form['job_description']
         resume_files = request.files.getlist('resume_files')
 
@@ -75,7 +82,8 @@ from flask import send_file
 @app.route('/download_csv')
 def download_csv():
     # Generate the CSV content
-    results = request.args.get('results')
+    ##results = request.args.get('results')
+    results = session.get('results')
     if results:
         results = eval(results)  # Convert the results back to a list
 
