@@ -74,6 +74,7 @@ def index():
         ranked_resumes.sort(key=lambda x: x[2], reverse=True)
 
         results = ranked_resumes
+        session['results'] = results
 
     return render_template('index.html', results=results)
 
@@ -83,7 +84,7 @@ from flask import send_file
 def download_csv():
     # Generate the CSV content
     ##results = request.args.get('results')
-    results = session.get('results')
+    results = session.get('results', [])
     if results:
         #results = eval(results)  # Convert the results back to a list
         csv_filename = "ranked_resumes.csv"
