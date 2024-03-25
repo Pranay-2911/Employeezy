@@ -1,16 +1,19 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask_session import Session
 import spacy
 import PyPDF2
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from flask import Flask, session
-from flask_session import Session
 import re
 import csv
 import os
 
 app = Flask(__name__)
 
+# Set the secret key for session management
+app.secret_key = 'your_secret_key'
+
+# Configure session to use filesystem
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -34,12 +37,25 @@ def extract_entities(text):
         names = [" ".join(names[0])]
     return emails, names
 
-from flask import session
 @app.route('/', methods=['GET', 'POST'])
-def index():
-    results = []
+def login():
     if request.method == 'POST':
-        session['results'] = results
+        email = request.form['loginemail']
+        password = request.form['loginPassword']
+        if email == 'admin@mail.com' and password == 'admin1234':
+            # Redirect to index page after successful login
+            return redirect(url_for('index'))
+        else:
+            error = 'Invalid credentials. Please try again.'
+            return render_template('login.html', error=error)
+    return render_template('login.html')
+
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    if 'results' not in session:
+        session['results'] = []
+
+    if request.method == 'POST':
         job_description = request.form['job_description']
         resume_files = request.files.getlist('resume_files')
 
@@ -67,44 +83,36 @@ def index():
         ranked_resumes = []
         for (names, emails, resume_text) in processed_resumes:
             resume_vector = tfidf_vectorizer.transform([resume_text])
-            similarity = cosine_similarity(job_desc_vector, resume_vector)[0][0] * 100 
+            similarity = cosine_similarity(job_desc_vector, resume_vector)[0][0] * 100
             ranked_resumes.append((names, emails, similarity))
 
         # Sort resumes by similarity score
         ranked_resumes.sort(key=lambda x: x[2], reverse=True)
 
-        results = ranked_resumes
-        session['results'] = results
+        session['results'] = ranked_resumes
 
-    return render_template('index.html', results=results)
-
-from flask import send_file
+    return render_template('index.html', results=session['results'])
 
 @app.route('/download_csv')
 def download_csv():
-    # Generate the CSV content
-    ##results = request.args.get('results')
     results = session.get('results', [])
     if results:
-        #results = eval(results)  # Convert the results back to a list
         csv_filename = "ranked_resumes.csv"
+        csv_content = "Rank,Name,Email,Similarity\n"
+        for rank, (names, emails, similarity) in enumerate(results, start=1):
+            name = names[0] if names else "N/A"
+            email = emails[0] if emails else "N/A"
+            csv_content += f"{rank},{name},{email},{similarity}\n"
 
+        # Create a temporary file to store the CSV content
+        with open(csv_filename, "w") as csv_file:
+            csv_file.write(csv_content)
 
-    csv_content = "Rank,Name,Email,Similarity\n"
-    for rank, (names, emails, similarity) in enumerate(results, start=1):
-        name = names[0] if names else "N/A"
-        email = emails[0] if emails else "N/A"
-        csv_content += f"{rank},{name},{email},{similarity}\n"
-
-    # Create a temporary file to store the CSV content
-    csv_filename = "ranked_resumes.csv"
-    with open(csv_filename, "w") as csv_file:
-        csv_file.write(csv_content)
-
-    # Send the file for download
-    
-    csv_full_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), csv_filename)
-    return send_file(csv_full_path, as_attachment=True, download_name="ranked_resumes.csv")
+        # Send the file for download
+        csv_full_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), csv_filename)
+        return send_file(csv_full_path, as_attachment=True, download_name="ranked_resumes.csv")
+    else:
+        return 'No results to download'
 
 if __name__ == '__main__':
     app.run(debug=True)

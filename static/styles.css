@@ -83,3 +83,44 @@ th {
         padding: 15px;
     }
 }
+
+.resume-list-container {
+    overflow-y: scroll;
+    max-height: 300px; /* Adjust the height as needed */
+  }
+  
+  .resume-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .resume-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .resume-table-container {
+    overflow-y: scroll;
+    max-height: 300px; /* Adjust the height as needed */
+  }
+  
+  .resume-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .resume-table th,
+  .resume-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: white; /* Set text color to white */
+  }
+  
+  .resume-table th {
+    background-color: #000; /* Adjust header background color */
+  }
+  
