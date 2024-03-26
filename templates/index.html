@@ -13,7 +13,6 @@
     <label for="job_description">Job Description:</label>
     <textarea name="job_description" rows="4" cols="50" required></textarea>
     <br>
-    <table class="resume-table">
     <label for="resume_files">Upload Resumes (PDF):</label>
     <input type="file" name="resume_files" accept=".pdf" multiple required>
     <br>
@@ -24,6 +23,7 @@
   {% if results %}
     <h2>Ranked Resumes:</h2>
     <div class="resume-table-container">
+      <table class="resume-table">
         <thead>
           <tr>
             <th>Rank</th>
