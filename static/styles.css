@@ -4,30 +4,29 @@ body, h1, h2, p, table, th, td {
     padding: 0;
 }
 
-
 /* Basic styling */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+    font-family: "Montserrat", sans-serif;
+    background: #f7edd5; /* Same background color as earlier */
     color: #333;
     padding: 20px;
 }
 
 h1 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #000; /* Changed heading color to black */
 }
 
 h2 {
-    color: #fff;
+    color: #000; /* Changed heading color to black */
 }
 
 /* Form styling */
 form {
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.85); /* Adjusted background color */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
 }
 
 label, input[type="file"], textarea, input[type="submit"] {
@@ -49,7 +48,7 @@ textarea {
 }
 
 input[type="submit"] {
-    background-color: #007bff;
+    background-color: #f95959; /* Adjusted button color */
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -62,18 +61,19 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin-top: 20px;
-    color: #ddd;
+    color: #000; /* Changed table content color to black */
 }
 
 th, td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    color: #000; /* Changed table content color to black */
 }
 
 th {
-    background-color: #f2f2f2;
-    color: #131212;
+    background-color: #000; /* Adjust header background color */
+    color: #fff; /* Change font color of table headings to white */
 }
 
 /* Responsive layout */
@@ -87,40 +87,40 @@ th {
 .resume-list-container {
     overflow-y: scroll;
     max-height: 300px; /* Adjust the height as needed */
-  }
-  
-  .resume-list {
+}
+
+.resume-list {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .resume-details {
+}
+
+.resume-details {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .resume-table-container {
+}
+
+.resume-table-container {
     overflow-y: scroll;
     max-height: 300px; /* Adjust the height as needed */
-  }
-  
-  .resume-table {
+}
+
+.resume-table {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  .resume-table th,
-  .resume-table td {
+}
+
+.resume-table th,
+.resume-table td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    color: white; /* Set text color to white */
-  }
-  
-  .resume-table th {
+    color: #000; /* Set table content color to black */
+}
+
+.resume-table th {
     background-color: #000; /* Adjust header background color */
-  }
-  
+    color: #fff; /* Change font color of table headings to white */
+}

@@ -52,6 +52,10 @@ def login():
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    # Clear ranked resumes from session on initial GET request (index page load)
+    if request.method == 'GET':
+        session.pop('results', default=None)
+
     if 'results' not in session:
         session['results'] = []
 
